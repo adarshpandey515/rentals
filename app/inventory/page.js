@@ -96,26 +96,26 @@ export default function InventoryPage() {
   }
 
   return (
-    <div className="p-6 min-h-screen bg-background">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-foreground">Inventory Management</h1>
+    <div className="p-3 sm:p-6 min-h-screen bg-background">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Inventory Management</h1>
         {!showForm && (
           <button
             onClick={() => {
               resetForm();
               setShowForm(true);
             }}
-            className="flex items-center gap-2 bg-accent text-black px-4 py-2 rounded-lg hover:bg-accent/80 font-semibold"
+            className="flex items-center gap-2 bg-accent text-black px-3 sm:px-4 py-2 rounded-lg hover:bg-accent/80 font-semibold text-sm sm:text-base whitespace-nowrap"
           >
-            <Plus size={20} /> Add Item
+            <Plus size={18} /> <span>Add Item</span>
           </button>
         )}
       </div>
 
       {showForm && (
-        <div className="bg-card rounded-lg shadow-md p-6 mb-6 border border-border">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-foreground">
+        <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 mb-6 border border-border">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-foreground">
               {editingId ? 'Edit Item' : 'Add New Item'}
             </h2>
             <button
@@ -127,7 +127,7 @@ export default function InventoryPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <input
                 type="text"
                 name="name"
@@ -135,7 +135,7 @@ export default function InventoryPage() {
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="text"
@@ -143,14 +143,14 @@ export default function InventoryPage() {
                 placeholder="Category (e.g., Lighting, Equipment)"
                 value={formData.category}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <textarea
                 name="description"
                 placeholder="Description"
                 value={formData.description}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 col-span-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 col-span-1 sm:col-span-2 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="number"
@@ -159,13 +159,13 @@ export default function InventoryPage() {
                 value={formData.quantity}
                 onChange={handleInputChange}
                 required
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <select
                 name="unit"
                 value={formData.unit}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground text-sm sm:text-base"
               >
                 <option value="piece">Piece</option>
                 <option value="meter">Meter</option>
@@ -180,7 +180,7 @@ export default function InventoryPage() {
                 onChange={handleInputChange}
                 required
                 step="0.01"
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
             </div>
 
@@ -202,31 +202,31 @@ export default function InventoryPage() {
           </div>
         ) : (
           items.map((item) => (
-            <div key={item.id} className="bg-card rounded-lg shadow-md p-4 border border-border hover:border-accent/50 transition-all">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <h3 className="font-bold text-lg text-foreground">{item.name}</h3>
-                  <p className="text-sm text-gray-400">{item.category}</p>
-                  <p className="text-sm text-gray-400">{item.description}</p>
+            <div key={item.id} className="bg-card rounded-lg shadow-md p-3 sm:p-4 border border-border hover:border-accent/50 transition-all">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="min-w-0">
+                  <h3 className="font-bold text-base sm:text-lg text-foreground truncate">{item.name}</h3>
+                  <p className="text-xs sm:text-sm text-gray-400 truncate">{item.category}</p>
+                  <p className="text-xs sm:text-sm text-gray-400 line-clamp-2">{item.description}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-300"><strong>Quantity:</strong> {item.quantity} {item.unit}</p>
-                  <p className="text-sm text-gray-300"><strong>Price per Unit:</strong> ₹{Number(item.price).toFixed(2)}</p>
-                  <p className="text-sm text-gray-300"><strong>Total Value:</strong> ₹{(item.quantity * item.price).toFixed(2)}</p>
+                  <p className="text-xs sm:text-sm text-gray-300"><strong>Qty:</strong> {item.quantity} {item.unit}</p>
+                  <p className="text-xs sm:text-sm text-gray-300"><strong>Price:</strong> ₹{Number(item.price).toFixed(2)}</p>
+                  <p className="text-xs sm:text-sm text-gray-300"><strong>Value:</strong> ₹{(item.quantity * item.price).toFixed(2)}</p>
                 </div>
               </div>
-              <div className="flex gap-2 mt-4">
+              <div className="flex gap-2 flex-wrap">
                 <button
                   onClick={() => handleEdit(item)}
-                  className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                  className="flex items-center gap-1 bg-blue-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-blue-700 text-xs sm:text-sm"
                 >
-                  <Edit2 size={16} /> Edit
+                  <Edit2 size={14} /> Edit
                 </button>
                 <button
                   onClick={() => handleDelete(item.id)}
-                  className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                  className="flex items-center gap-1 bg-red-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-red-700 text-xs sm:text-sm"
                 >
-                  <Trash2 size={16} /> Delete
+                  <Trash2 size={14} /> Delete
                 </button>
               </div>
             </div>

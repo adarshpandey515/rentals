@@ -41,31 +41,31 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Main Content */}
-      <main className="p-4 lg:p-8 overflow-y-auto">
-        <header className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
-          <div>
-            <h2 className="text-3xl font-bold">Welcome back, Admin</h2>
-            <p className="text-gray-400">Here's what's happening with your rentals today.</p>
+      <main className="p-3 sm:p-4 lg:p-8 overflow-y-auto">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="flex-1">
+            <h2 className="text-2xl sm:text-3xl font-bold">Welcome back, Admin</h2>
+            <p className="text-gray-400 text-sm sm:text-base">Here's what's happening with your rentals today.</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
             <Link
               href="/inventory"
-              className="px-6 py-2.5 bg-card border border-border text-gray-400 hover:text-white font-bold rounded-xl transition-all flex items-center gap-2"
+              className="px-4 sm:px-6 py-2 sm:py-2.5 bg-card border border-border text-gray-400 hover:text-white font-bold rounded-xl transition-all flex items-center justify-center sm:justify-start gap-2 text-sm sm:text-base"
             >
-              <Package size={20} />
-              Manage Gear
+              <Package size={18} />
+              <span className="hidden sm:inline">Manage Gear</span>
             </Link>
             <Link
               href="/rentals/create"
-              className="px-6 py-2.5 premium-gradient text-black font-bold rounded-xl shadow-lg shadow-accent/20 hover:scale-105 transition-transform flex items-center gap-2"
+              className="px-4 sm:px-6 py-2 sm:py-2.5 premium-gradient text-black font-bold rounded-xl shadow-lg shadow-accent/20 hover:scale-105 transition-transform flex items-center justify-center gap-2 text-sm sm:text-base"
             >
-              <Plus size={20} />
-              New Rental
+              <Plus size={18} />
+              <span className="hidden sm:inline">New Rental</span>
             </Link>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {[
             { label: "Active Rentals", value: stats.active.toString(), icon: Clock, color: "text-blue-400" },
             { label: "Returns Due Today", value: stats.dueToday.toString(), icon: AlertCircle, color: "text-orange-400" },

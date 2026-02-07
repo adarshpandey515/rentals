@@ -129,38 +129,38 @@ export default function ClientsPage() {
   }
 
   return (
-    <div className="p-6 min-h-screen bg-background">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-foreground">Clients Management</h1>
+    <div className="p-3 sm:p-6 min-h-screen bg-background">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Clients Management</h1>
         {!showForm && (
           <button
             onClick={() => {
               resetForm();
               setShowForm(true);
             }}
-            className="flex items-center gap-2 bg-accent text-black px-4 py-2 rounded-lg hover:bg-accent/80 font-semibold"
+            className="flex items-center gap-2 bg-accent text-black px-3 sm:px-4 py-2 rounded-lg hover:bg-accent/80 font-semibold text-sm sm:text-base whitespace-nowrap"
           >
-            <Plus size={20} /> Add Client
+            <Plus size={18} /> <span>Add Client</span>
           </button>
         )}
       </div>
 
       {showForm && (
-        <div className="bg-card rounded-lg shadow-md p-6 mb-6 border border-border">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-foreground">
+        <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 mb-6 border border-border">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-foreground">
               {editingId ? 'Edit Client' : 'Add New Client'}
             </h2>
             <button
               onClick={resetForm}
-              className="text-gray-400 hover:text-red-400"
+              className="text-gray-400 hover:text-red-400 p-2 sm:p-0"
             >
               <X size={20} />
             </button>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <input
                 type="text"
                 name="name"
@@ -168,13 +168,13 @@ export default function ClientsPage() {
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <select
                 name="companyId"
                 value={formData.companyId}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground text-sm sm:text-base"
               >
                 <option value="">-- Select Company (Optional) --</option>
                 {companies.map((company) => (
@@ -189,7 +189,7 @@ export default function ClientsPage() {
                 placeholder="GST Number"
                 value={formData.gstNumber}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="text"
@@ -198,7 +198,7 @@ export default function ClientsPage() {
                 value={formData.address}
                 onChange={handleInputChange}
                 required
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="text"
@@ -206,7 +206,7 @@ export default function ClientsPage() {
                 placeholder="City"
                 value={formData.city}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="text"
@@ -214,7 +214,7 @@ export default function ClientsPage() {
                 placeholder="State"
                 value={formData.state}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="text"
@@ -222,7 +222,7 @@ export default function ClientsPage() {
                 placeholder="Zip Code"
                 value={formData.zipCode}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="tel"
@@ -230,7 +230,7 @@ export default function ClientsPage() {
                 placeholder="Phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="email"
@@ -238,7 +238,7 @@ export default function ClientsPage() {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="text"
@@ -246,7 +246,7 @@ export default function ClientsPage() {
                 placeholder="Contact Person Name"
                 value={formData.contactPerson}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
               <input
                 type="tel"
@@ -254,7 +254,7 @@ export default function ClientsPage() {
                 placeholder="Contact Person Phone"
                 value={formData.contactPersonPhone}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 bg-input text-foreground placeholder-gray-500"
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
             </div>
 
@@ -278,44 +278,40 @@ export default function ClientsPage() {
           clients.map((client) => {
             const company = client.companyId ? companies.find(c => c.id === client.companyId) : null;
             return (
-            <div key={client.id} className="bg-card rounded-lg shadow-md p-4 border border-border hover:border-accent/50 transition-all">
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-                <div>
-                  <h3 className="font-bold text-lg text-foreground">{client.name}</h3>
-                  <p className="text-sm text-gray-400">{client.address}</p>
-                  <p className="text-sm text-gray-400">
+            <div key={client.id} className="bg-card rounded-lg shadow-md p-3 sm:p-4 border border-border hover:border-accent/50 transition-all">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="min-w-0">
+                  <h3 className="font-bold text-base sm:text-lg text-foreground truncate">{client.name}</h3>
+                  <p className="text-xs sm:text-sm text-gray-400 truncate">{client.address}</p>
+                  <p className="text-xs sm:text-sm text-gray-400 line-clamp-1">
                     {client.city}, {client.state} {client.zipCode}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-300"><strong>GST:</strong> {client.gstNumber}</p>
-                  <p className="text-sm text-gray-300"><strong>Phone:</strong> {client.phone}</p>
-                  <p className="text-sm text-gray-300"><strong>Email:</strong> {client.email}</p>
+                  <p className="text-xs sm:text-sm text-gray-300"><strong>GST:</strong> {client.gstNumber}</p>
+                  <p className="text-xs sm:text-sm text-gray-300"><strong>Ph:</strong> {client.phone}</p>
+                  <p className="text-xs sm:text-sm text-gray-300 truncate"><strong>Email:</strong> {client.email}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-300"><strong>Contact Person:</strong> {client.contactPerson}</p>
-                  <p className="text-sm text-gray-300"><strong>Contact Phone:</strong> {client.contactPersonPhone}</p>
+                  <p className="text-xs sm:text-sm text-gray-300"><strong>Contact:</strong> {client.contactPerson}</p>
+                  <p className="text-xs sm:text-sm text-gray-300"><strong>Ph:</strong> {client.contactPersonPhone}</p>
+                  {company && (
+                    <p className="text-xs sm:text-sm text-accent font-bold truncate">{company.name}</p>
+                  )}
                 </div>
-                {company && (
-                  <div className="bg-input rounded p-2">
-                    <p className="text-xs text-gray-400 uppercase font-semibold mb-1">Belongs to</p>
-                    <p className="text-sm text-accent font-bold">{company.name}</p>
-                    <p className="text-xs text-gray-400">{company.city}</p>
-                  </div>
-                )}
               </div>
-              <div className="flex gap-2 mt-4">
+              <div className="flex gap-2 flex-wrap">
                 <button
                   onClick={() => handleEdit(client)}
-                  className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                  className="flex items-center gap-1 bg-blue-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-blue-700 text-xs sm:text-sm"
                 >
-                  <Edit2 size={16} /> Edit
+                  <Edit2 size={14} /> Edit
                 </button>
                 <button
                   onClick={() => handleDelete(client.id)}
-                  className="flex items-center gap-1 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                  className="flex items-center gap-1 bg-red-600 text-white px-2 sm:px-3 py-1 rounded hover:bg-red-700 text-xs sm:text-sm"
                 >
-                  <Trash2 size={16} /> Delete
+                  <Trash2 size={14} /> Delete
                 </button>
               </div>
             </div>

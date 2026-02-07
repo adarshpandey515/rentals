@@ -118,31 +118,31 @@ export default function CompaniesPage() {
   }
 
   return (
-    <div className="p-6 min-h-screen bg-background">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-foreground">Companies Management</h1>
+    <div className="p-3 sm:p-6 min-h-screen bg-background">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Companies Management</h1>
         {!showForm && (
           <button
             onClick={() => {
               resetForm();
               setShowForm(true);
             }}
-            className="flex items-center gap-2 bg-accent text-black px-4 py-2 rounded-lg hover:bg-accent/80 font-semibold"
+            className="flex items-center gap-2 bg-accent text-black px-3 sm:px-4 py-2 rounded-lg hover:bg-accent/80 font-semibold text-sm sm:text-base whitespace-nowrap"
           >
-            <Plus size={20} /> Add Company
+            <Plus size={18} /> <span>Add Company</span>
           </button>
         )}
       </div>
 
       {showForm && (
-        <div className="bg-card rounded-lg shadow-md p-6 mb-6 border border-border">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-foreground">
+        <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 mb-6 border border-border">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-foreground">
               {editingId ? 'Edit Company' : 'Add New Company'}
             </h2>
             <button
               onClick={resetForm}
-              className="text-gray-400 hover:text-red-400"
+              className="text-gray-400 hover:text-red-400 p-2 sm:p-0"
             >
               <X size={20} />
             </button>
