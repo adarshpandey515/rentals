@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import {
   Building2,
   Users,
@@ -12,10 +13,13 @@ import {
   BarChart3,
   Settings,
   Home,
+  Menu,
+  X,
 } from 'lucide-react';
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   const modules = [
     {
@@ -65,10 +69,37 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-card border-r border-border p-6 flex flex-col z-50">
+    <>
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden fixed top-4 left-4 z-[100] p-2 hover:bg-white/10 rounded-lg transition-colors"
+      >
+        {isOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      {/* Overlay for mobile */}
+      {isOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`fixed left-0 top-0 h-screen w-64 bg-card border-r border-border p-6 flex flex-col z-50 transition-transform duration-300 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}>
+        {/* Close button for mobile */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="md:hidden absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-colors"
+        >
+          <X size={24} />
+        </button>
       {/* Logo */}
-      <div className="mb-8">
-        <Link href="/" className="flex items-center gap-2">
+      <div className="mb-8 mt-8 md:mt-0">
+        <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
           <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
             <ShoppingCart size={24} className="text-black" />
           </div>
@@ -89,6 +120,7 @@ export default function Sidebar() {
             <Link
               key={module.href}
               href={module.href}
+              onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                 active
                   ? 'bg-accent text-black font-semibold'
@@ -106,6 +138,7 @@ export default function Sidebar() {
       <div className="space-y-2 pt-4 border-t border-border">
         <Link
           href="/settings"
+          onClick={() => setIsOpen(false)}
           className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
             isActive('/settings')
               ? 'bg-accent text-black font-semibold'
@@ -116,6 +149,7 @@ export default function Sidebar() {
           <span>Settings</span>
         </Link>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }

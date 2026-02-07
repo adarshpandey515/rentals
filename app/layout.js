@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen bg-background text-foreground`} suppressHydrationWarning>
         <Sidebar />
-        <main className="ml-64 min-h-screen bg-background">
+        <main className="md:ml-64 min-h-screen bg-background">
           {children}
         </main>
         <Toaster
