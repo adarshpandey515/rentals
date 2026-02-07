@@ -1,0 +1,38 @@
+type User @table {
+  displayName: String!
+  email: String!
+  createdAt: Timestamp!
+  photoUrl: String
+  phoneNumber: String
+  address: String
+}
+
+type Category @table {
+  name: String!
+  createdAt: Timestamp!
+  description: String
+}
+
+type Item @table {
+  owner: User!
+  name: String!
+  description: String!
+  dailyRentalRate: Float!
+  category: Category!
+  createdAt: Timestamp!
+  isAvailable: Boolean!
+  imageUrl: String
+  minRentalDays: Int
+  maxRentalDays: Int
+}
+
+type RentalRequest @table {
+  renter: User!
+  item: Item!
+  startDate: Date!
+  endDate: Date!
+  status: String!
+  totalPrice: Float!
+  createdAt: Timestamp!
+  messageToOwner: String
+}

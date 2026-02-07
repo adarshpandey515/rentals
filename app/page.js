@@ -1,63 +1,168 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React, { useState, useEffect } from "react";
+import {
+  Package,
+  FileText,
+  Receipt,
+  TrendingUp,
+  AlertCircle,
+  Clock,
+  Plus
+} from "lucide-react";
+import Link from "next/link";
+import { rentalActions } from "@/lib/db";
+
+export default function Dashboard() {
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({ active: 0, dueToday: 0, pendingPayments: 0, revenue: 0 });
+  const [recentRentals, setRecentRentals] = useState([]);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const fetchDashboardData = async () => {
+    setLoading(true);
+    try {
+      const [statsData, recentData] = await Promise.all([
+        rentalActions.getStats(),
+        rentalActions.getRecent()
+      ]);
+      setStats(statsData);
+      setRecentRentals(recentData);
+    } catch (error) {
+      console.error("Error fetching dashboard data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Main Content */}
+      <main className="p-4 lg:p-8 overflow-y-auto">
+        <header className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
+          <div>
+            <h2 className="text-3xl font-bold">Welcome back, Admin</h2>
+            <p className="text-gray-400">Here's what's happening with your rentals today.</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/inventory"
+              className="px-6 py-2.5 bg-card border border-border text-gray-400 hover:text-white font-bold rounded-xl transition-all flex items-center gap-2"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <Package size={20} />
+              Manage Gear
+            </Link>
+            <Link
+              href="/rentals/create"
+              className="px-6 py-2.5 premium-gradient text-black font-bold rounded-xl shadow-lg shadow-accent/20 hover:scale-105 transition-transform flex items-center gap-2"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <Plus size={20} />
+              New Rental
+            </Link>
+          </div>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {[
+            { label: "Active Rentals", value: stats.active.toString(), icon: Clock, color: "text-blue-400" },
+            { label: "Returns Due Today", value: stats.dueToday.toString(), icon: AlertCircle, color: "text-orange-400" },
+            { label: "Pending Payments", value: `₹${stats.pendingPayments.toLocaleString()}`, icon: Receipt, color: "text-red-400" },
+            { label: "Total Revenue", value: `₹${stats.revenue.toLocaleString()}`, icon: TrendingUp, color: "text-green-400" },
+          ].map((stat, i) => (
+            <div key={i} className="premium-card">
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-2 rounded-lg bg-white/5 ${stat.color}`}>
+                  <stat.icon size={24} />
+                </div>
+                <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">Real-time</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1">{loading ? "..." : stat.value}</h3>
+              <p className="text-gray-400 text-sm">{stat.label}</p>
+            </div>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Recent Activity & Alerts */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 premium-card">
+            <h3 className="text-xl font-bold mb-6">Recent Rentals</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="text-gray-500 border-b border-border">
+                    <th className="pb-4 font-medium">Client</th>
+                    <th className="pb-4 font-medium">Items</th>
+                    <th className="pb-4 font-medium">Status</th>
+                    <th className="pb-4 font-medium text-right">Total</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {loading ? (
+                    [...Array(3)].map((_, i) => (
+                      <tr key={i} className="animate-pulse">
+                        <td className="py-4"><div className="h-10 w-32 bg-white/5 rounded-lg"></div></td>
+                        <td className="py-4"><div className="h-6 w-24 bg-white/5 rounded-lg"></div></td>
+                        <td className="py-4"><div className="h-6 w-20 bg-white/5 rounded-lg"></div></td>
+                        <td className="py-4 text-right"><div className="h-6 w-16 bg-white/5 rounded-lg ml-auto"></div></td>
+                      </tr>
+                    ))
+                  ) : recentRentals.length === 0 ? (
+                    <tr>
+                      <td colSpan="4" className="py-10 text-center text-gray-500">No recent rentals found.</td>
+                    </tr>
+                  ) : (
+                    recentRentals.map((rental) => (
+                      <tr key={rental.id} className="group hover:bg-white/5 transition-colors">
+                        <td className="py-4">
+                          <div className="font-medium">{rental.clientName}</div>
+                          <div className="text-xs text-gray-500">{rental.id.slice(0, 8)}</div>
+                        </td>
+                        <td className="py-4 text-sm text-gray-400">
+                          {rental.items?.length} items • {rental.nod} days
+                        </td>
+                        <td className="py-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${rental.status === 'Active' ? 'bg-blue-400/10 text-blue-400 border-blue-400/20' :
+                            'bg-green-400/10 text-green-400 border-green-400/20'
+                            }`}>
+                            {rental.status}
+                          </span>
+                        </td>
+                        <td className="py-4 text-right font-bold">₹{Number(rental.total || 0).toLocaleString()}</td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="premium-card">
+            <h3 className="text-xl font-bold mb-6">Inventory Alerts</h3>
+            <div className="space-y-6">
+              {[
+                { item: "ARRI Skypanel S60", status: "Low Stock", count: "2 left", color: "text-orange-400" },
+                { item: "C-Stands (Heavy Duty)", status: "Out of Stock", count: "0 left", color: "text-red-400" },
+                { item: "LED Panel 1x1", status: "Damaged", count: "3 units", color: "text-gray-400" },
+              ].map((alert, i) => (
+                <div key={i} className="flex items-center gap-4">
+                  <div className={`w-2 h-10 rounded-full bg-current ${alert.color}`} />
+                  <div className="flex-1">
+                    <div className="font-medium">{alert.item}</div>
+                    <div className="text-sm text-gray-500">{alert.status} • {alert.count}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/inventory"
+              className="block w-full mt-8 py-3 rounded-xl border border-border text-center text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            >
+              View All Inventory
+            </Link>
+          </div>
         </div>
       </main>
     </div>
