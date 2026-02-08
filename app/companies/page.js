@@ -118,9 +118,9 @@ export default function CompaniesPage() {
   }
 
   return (
-    <div className="p-3 sm:p-6 min-h-screen bg-background">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Companies Management</h1>
+    <div className="p-2 xs:p-3 sm:p-6 min-h-screen bg-background overflow-x-hidden w-full max-w-screen">
+      <div className="flex flex-col xs:gap-3 sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+        <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold text-foreground truncate">Companies Management</h1>
         {!showForm && (
           <button
             onClick={() => {

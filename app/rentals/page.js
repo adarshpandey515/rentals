@@ -64,16 +64,16 @@ export default function RentalsListPage() {
     };
 
     return (
-        <div className="min-h-screen bg-background text-foreground p-4 lg:p-8">
-            <div className="max-w-7xl mx-auto">
-                <header className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-10">
-                    <div className="flex items-center gap-4">
-                        <Link href="/" className="p-2 hover:bg-white/5 rounded-lg transition-colors">
-                            <ArrowLeft size={24} />
+        <div className="min-h-screen bg-background text-foreground p-2 xs:p-3 sm:p-4 lg:p-8 overflow-x-hidden w-full max-w-screen">
+            <div className="w-full">
+                <header className="flex flex-col xs:gap-2 sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-10">
+                    <div className="flex items-center gap-2 xs:gap-3 sm:gap-4 min-w-0">
+                        <Link href="/" className="p-2 hover:bg-white/5 rounded-lg transition-colors flex-shrink-0">
+                            <ArrowLeft size={20} className="xs:w-6 xs:h-6 sm:w-6 sm:h-6" />
                         </Link>
-                        <div>
-                            <h1 className="text-3xl font-bold">Rentals</h1>
-                            <p className="text-gray-400">Operational layer: Track gear movement and bookings.</p>
+                        <div className="min-w-0">
+                            <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold truncate">Rentals</h1>
+                            <p className="text-gray-400 text-xs xs:text-sm sm:text-base truncate">Track gear movement and bookings.</p>
                         </div>
                     </div>
                     <Link

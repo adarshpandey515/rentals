@@ -90,15 +90,8 @@ export default function Sidebar() {
       <aside className={`fixed left-0 top-0 h-screen w-64 bg-card border-r border-border p-6 flex flex-col z-50 transition-transform duration-300 ${
         isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       }`}>
-        {/* Close button for mobile */}
-        <button
-          onClick={() => setIsOpen(false)}
-          className="md:hidden absolute top-4 right-4 p-2 hover:bg-white/10 rounded-lg transition-colors"
-        >
-          <X size={24} />
-        </button>
-      {/* Logo */}
-      <div className="mb-8 mt-8 md:mt-0">
+      {/* Logo with top padding for mobile */}
+      <div className="mb-8 mt-12 md:mt-0">
         <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
           <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
             <ShoppingCart size={24} className="text-black" />
