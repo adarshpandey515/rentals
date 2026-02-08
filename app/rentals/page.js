@@ -22,7 +22,6 @@ import { toast } from "sonner";
 export default function RentalsListPage() {
     const [rentals, setRentals] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [openMenu, setOpenMenu] = useState(null);
     const [deleteConfirm, setDeleteConfirm] = useState(null);
 
     useEffect(() => {
@@ -45,7 +44,6 @@ export default function RentalsListPage() {
             await rentalActions.delete(id);
             setRentals(rentals.filter(r => r.id !== id));
             setDeleteConfirm(null);
-            setOpenMenu(null);
             toast.success("Rental deleted successfully!");
         } catch (error) {
             console.error("Error deleting rental:", error);
@@ -148,26 +146,14 @@ export default function RentalsListPage() {
                                                     {rental.status}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-5 text-right relative">
-                                                <div className="relative">
-                                                    <button 
-                                                        onClick={() => setOpenMenu(openMenu === rental.id ? null : rental.id)}
-                                                        className="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors"
-                                                    >
-                                                        <MoreVertical size={18} />
-                                                    </button>
-                                                    {openMenu === rental.id && (
-                                                        <div className="absolute right-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg z-50">
-                                                            <button
-                                                                onClick={() => setDeleteConfirm(rental.id)}
-                                                                className="w-full text-left px-4 py-3 text-red-400 hover:bg-red-400/10 transition-colors flex items-center gap-2 border-t border-border first:border-t-0"
-                                                            >
-                                                                <Trash2 size={16} />
-                                                                Delete Rental
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div>
+                                            <td className="px-6 py-5 text-right">
+                                                <button 
+                                                    onClick={() => setDeleteConfirm(rental.id)}
+                                                    className="p-2 hover:bg-red-400/10 rounded-lg text-red-400 hover:text-red-300 transition-colors flex items-center gap-1"
+                                                >
+                                                    <Trash2 size={18} />
+                                                    <span className="text-xs sm:text-sm">Delete</span>
+                                                </button>
                                             </td>
                                         </tr>
                                     ))

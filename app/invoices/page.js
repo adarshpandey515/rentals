@@ -86,7 +86,7 @@ export default function InvoicesPage() {
     }
   };
 
-  const generatePDF = (invoice) => {
+  const downloadPDF = (invoice) => {
     const selectedCompany = companies.find(c => c.id === invoice.companyId);
     const selectedRental = rentals.find(r => r.id === invoice.rentalId);
     const selectedClient = clients.find(c => c.id === selectedRental?.clientId);
@@ -229,25 +229,18 @@ export default function InvoicesPage() {
       </html>
     `;
 
-    // Download PDF directly without new tab
+    // Download as HTML file
     const blob = new Blob([invoiceHTML], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `Invoice_${invoice.invoiceNumber}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
     
-    // Create hidden iframe to trigger print dialog
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = url;
-    document.body.appendChild(iframe);
-    
-    iframe.onload = () => {
-      iframe.contentWindow.print();
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-        URL.revokeObjectURL(url);
-      }, 500);
-    };
-    
-    toast.success('Invoice print dialog opened - Use Ctrl+S or Cmd+S to save as PDF');
+    toast.success('Invoice downloaded successfully');
   };
 
   if (loading) {
@@ -432,10 +425,10 @@ export default function InvoicesPage() {
                 </div>
                 <div className="flex gap-2 mt-4">
                   <button
-                    onClick={() => generatePDF(invoice)}
+                    onClick={() => downloadPDF(invoice)}
                     className="flex items-center gap-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
                   >
-                    <Download size={16} /> Print
+                    <Download size={16} /> Download
                   </button>
                 </div>
               </div>

@@ -74,16 +74,9 @@ export default function ClientsPage() {
   const resetForm = () => {
     setFormData({
       name: '',
-      gstNumber: '',
-      address: '',
-      city: '',
-      state: '',
-      zipCode: '',
-      phone: '',
-      email: '',
+      companyId: '',
       contactPerson: '',
       contactPersonPhone: '',
-      companyId: '',
     });
     setEditingId(null);
     setShowForm(false);
@@ -174,72 +167,16 @@ export default function ClientsPage() {
                 name="companyId"
                 value={formData.companyId}
                 onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground text-sm sm:text-base"
+                required
+                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground text-sm sm:text-base border-accent/50"
               >
-                <option value="">-- Select Company (Optional) --</option>
+                <option value="">-- Select Company (Required) --</option>
                 {companies.map((company) => (
                   <option key={company.id} value={company.id}>
                     {company.name}
                   </option>
                 ))}
               </select>
-              <input
-                type="text"
-                name="gstNumber"
-                placeholder="GST Number"
-                value={formData.gstNumber}
-                onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="text"
-                name="address"
-                placeholder="Address"
-                value={formData.address}
-                onChange={handleInputChange}
-                required
-                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="text"
-                name="city"
-                placeholder="City"
-                value={formData.city}
-                onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="text"
-                name="state"
-                placeholder="State"
-                value={formData.state}
-                onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="text"
-                name="zipCode"
-                placeholder="Zip Code"
-                value={formData.zipCode}
-                onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
-              />
               <input
                 type="text"
                 name="contactPerson"
@@ -257,6 +194,43 @@ export default function ClientsPage() {
                 className="border border-border rounded-lg p-2 sm:p-3 bg-input text-foreground placeholder-gray-500 text-sm sm:text-base"
               />
             </div>
+
+            {/* Company Details Display */}
+            {formData.companyId && (
+              <div className="bg-input/50 border border-border rounded-lg p-4 space-y-3">
+                <h3 className="text-sm font-semibold text-accent">Company Details (Auto-filled from selected company)</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs text-gray-400">GST Number</label>
+                    <p className="text-sm text-foreground font-medium">{formData.gstNumber || '—'}</p>
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-400">Address</label>
+                    <p className="text-sm text-foreground font-medium">{formData.address || '—'}</p>
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-400">City</label>
+                    <p className="text-sm text-foreground font-medium">{formData.city || '—'}</p>
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-400">State</label>
+                    <p className="text-sm text-foreground font-medium">{formData.state || '—'}</p>
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-400">Zip Code</label>
+                    <p className="text-sm text-foreground font-medium">{formData.zipCode || '—'}</p>
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-400">Phone</label>
+                    <p className="text-sm text-foreground font-medium">{formData.phone || '—'}</p>
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="text-xs text-gray-400">Email</label>
+                    <p className="text-sm text-foreground font-medium">{formData.email || '—'}</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <button
               type="submit"
