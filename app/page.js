@@ -42,9 +42,9 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Main Content */}
       <main className="p-2 xs:p-3 sm:p-4 lg:p-8 w-full max-w-screen overflow-hidden">
-        <header className="flex flex-col xs:gap-2 sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 xs:mb-5 sm:mb-8">
+        <header className="flex flex-col xs:gap-2 sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 xs:mb-5 sm:mb-8 pt-4 xs:pt-6 sm:pt-0">
           <div className="flex-1 min-w-0">
-            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold truncate">Welcome back, Admin</h2>
+            <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold truncate\">Welcome back, Admin</h2>
             <p className="text-gray-400 text-xs xs:text-sm sm:text-base truncate">Here's what's happening with your rentals today.</p>
           </div>
           <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2 sm:gap-3 text-xs xs:text-sm sm:text-base">

@@ -64,7 +64,7 @@ export default function RentalsListPage() {
     return (
         <div className="min-h-screen bg-background text-foreground p-2 xs:p-3 sm:p-4 lg:p-8 overflow-x-hidden w-full max-w-screen">
             <div className="w-full">
-                <header className="flex flex-col xs:gap-2 sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-10">
+                <header className="flex flex-col xs:gap-2 sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-10 pt-4 xs:pt-6 sm:pt-0">
                     <div className="flex items-center gap-2 xs:gap-3 sm:gap-4 min-w-0">
                         <Link href="/" className="p-2 hover:bg-white/5 rounded-lg transition-colors flex-shrink-0">
                             <ArrowLeft size={20} className="xs:w-6 xs:h-6 sm:w-6 sm:h-6" />

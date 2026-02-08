@@ -249,8 +249,8 @@ export default function InvoicesPage() {
 
   return (
     <div className="p-6 min-h-screen bg-background">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-foreground">Invoices Management</h1>
+      <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center gap-4 mb-6 pt-4 xs:pt-6 sm:pt-0">
+        <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold text-foreground">Invoices Management</h1>
         {!showForm && (
           <button
             onClick={() => {
