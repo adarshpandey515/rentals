@@ -297,24 +297,7 @@ export default function SettingsPage() {
                                 </div>
                             </div>
 
-                            {/* Theme Settings */}
-                            <div>
-                                <h3 className="text-lg font-semibold text-foreground mb-4">Theme</h3>
-                                <div>
-                                    <label className="block text-sm font-medium text-foreground mb-2">
-                                        Color Theme
-                                    </label>
-                                    <select
-                                        name="theme"
-                                        value={settings.theme}
-                                        onChange={handleInputChange}
-                                        className="w-full border border-border rounded-lg p-3 bg-input text-foreground"
-                                    >
-                                        <option value="dark">Dark</option>
-                                        <option value="light">Light</option>
-                                    </select>
-                                </div>
-                            </div>
+
                         </div>
 
                         {/* Action Buttons */}
